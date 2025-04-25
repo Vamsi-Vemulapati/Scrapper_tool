@@ -134,9 +134,9 @@ def scrape_trains(driver):
         for container in price_containers:
             prices = extract_text(container.find_elements(By.CLASS_NAME, "avail-cls"))
 
-            # ✅ Ensure full price extraction
+            # Ensure full price extraction
             full_prices = [price.strip() for price in prices if price.strip()]
-            prices_list.append("; ".join(full_prices) if full_prices else "N/A")  # Use '; ' instead of ', ' to avoid CSV conflicts
+            prices_list.append("; ".join(full_prices) if full_prices else "N/A")  
 
 
         frequencies_list = []
@@ -175,16 +175,16 @@ def scrape_trains(driver):
 
 # ---- Download CSV ----
 def download_csv(dataframe, filename):
-    # ✅ Convert all columns to string type to prevent truncation issues
+    # Convert all columns to string type to prevent truncation issues
     dataframe = dataframe.astype(str)
 
-    # ✅ Ensure proper encoding
+    # Ensure proper encoding
     csv_data = dataframe.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
     st.download_button(label="📥 Download CSV", data=csv_data, file_name=filename, mime="text/csv")
 
 # ---- Page Routing ----
 if page == "Home":
-    st.title("🚀 Web Scraper: Bus & Train Data Extraction")
+    st.title(" Web Scraper: Bus & Train Data Extraction")
     st.write("""
     This tool allows you to scrape bus and train details from *AbhiBus* and *Train Websites*.
     
@@ -223,7 +223,7 @@ elif page == "Bus Scraper 🚌":
 
                    
 
-                    # ✅ Separate Government & Private buses based on "Service Number"
+                    # Separate Government & Private buses based on "Service Number"
                     df_gov = df[df["Bus Name"].str.contains("Service Number", case=False, na=False)]
                     df_private = df[~df["Bus Name"].str.contains("Service Number", case=False, na=False)]
 
